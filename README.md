@@ -7,13 +7,24 @@ revisión humana antes de publicar. 100 % local y gratuito: sin APIs de IA ni se
 
 ## ⚡ Instalación en Windows (1 clic)
 
-1. **Descarga** este proyecto: botón verde **Code › Download ZIP** y descomprímelo.
-   (También puedes descargar solo [`INSTALAR.bat`](INSTALAR.bat): abre el archivo, pulsa
-   «Download raw file» y él descarga todo lo demás.)
-2. **Doble clic en `INSTALAR.bat`.** Si Windows muestra «Windows protegió su PC», pulsa
-   *Más información › Ejecutar de todas formas*.
+<p align="center">
+  <a href="https://github.com/Sigma01-Gang/YoutubeLameBicho/archive/refs/heads/claude/relaxed-meitner-ui2vo2.zip">
+    <img alt="Descargar e instalar ShortsFactory para Windows" src="https://img.shields.io/badge/DESCARGAR%20E%20INSTALAR-Windows%2010%2F11-2ea44f?style=for-the-badge&logo=windows&logoColor=white" height="48">
+  </a>
+</p>
+
+1. Pulsa el botón verde **DESCARGAR E INSTALAR**. Se descarga un `.zip`.
+2. Abre el `.zip` y haz **doble clic en `INSTALAR.bat`**. Si Windows muestra «Windows protegió su
+   PC», pulsa *Más información › Ejecutar de todas formas*.
 3. Espera a que termine (unos minutos). Se crea el icono **ShortsFactory** en el Escritorio y en el
    menú Inicio.
+
+**O con un solo comando:** abre **PowerShell** (tecla Windows, escribe `powershell`, Intro), pega
+esto y pulsa Intro:
+
+```powershell
+irm https://raw.githubusercontent.com/Sigma01-Gang/YoutubeLameBicho/refs/heads/claude/relaxed-meitner-ui2vo2/instalar.ps1 | iex
+```
 
 El instalador lo hace todo solo, sin permisos de administrador:
 
