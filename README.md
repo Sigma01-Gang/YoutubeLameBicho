@@ -1,12 +1,40 @@
-# ShortsFactory
+# 🎬 ShortsFactory
 
-Aplicación de escritorio en Python que automatiza la producción y publicación de vídeos para un canal de
-YouTube de **historias cortas por partes**, con versión en español y en inglés:
+**Crea y sube automáticamente YouTube Shorts e historias por partes, en español e inglés.**
+Trocea un vídeo largo en partes de 3 minutos o en Shorts de 15–60 s, lo pasa a vertical 9:16 con
+subtítulos, música y textos, y lo sube a YouTube Studio según una cola programada, siempre con
+revisión humana antes de publicar. 100 % local y gratuito: sin APIs de IA ni servicios de pago.
 
-1. Recibe un vídeo largo (15–20 min) y lo trocea en **partes de 3 minutos** o en **cortes de 15–60 s** para Shorts.
-2. Los convierte a **vertical 9:16 (1080x1920, H.264 + AAC, 30 fps)** con encuadre, audio, subtítulos y textos.
-3. Cada vídeo pasa por **revisión humana** (con verificación SHA-256 del archivo aprobado).
-4. Los sube a **YouTube Studio con Playwright** siguiendo una **cola programada** (cada 3–4 h por defecto).
+## ⚡ Instalación en Windows (1 clic)
+
+1. **Descarga** este proyecto: botón verde **Code › Download ZIP** y descomprímelo.
+   (También puedes descargar solo [`INSTALAR.bat`](INSTALAR.bat): abre el archivo, pulsa
+   «Download raw file» y él descarga todo lo demás.)
+2. **Doble clic en `INSTALAR.bat`.** Si Windows muestra «Windows protegió su PC», pulsa
+   *Más información › Ejecutar de todas formas*.
+3. Espera a que termine (unos minutos). Se crea el icono **ShortsFactory** en el Escritorio y en el
+   menú Inicio.
+
+El instalador lo hace todo solo, sin permisos de administrador:
+
+| Paso | Qué instala |
+|---|---|
+| 1 | Python 3.12 (solo si no lo tienes) |
+| 2 | La aplicación, en `%LOCALAPPDATA%\ShortsFactory\app` |
+| 3 | FFmpeg completo (con NVENC/QuickSync/AMF, libass y vidstab) |
+| 4 | Las dependencias de Python en un entorno propio |
+| 5 | El navegador Chromium para la subida |
+| 6 | Los accesos directos del Escritorio y del menú Inicio |
+
+- **Actualizar**: vuelve a ejecutar `INSTALAR.bat`. Tus datos, tu cola y tus sesiones se conservan.
+- **Desinstalar**: `%LOCALAPPDATA%\ShortsFactory\Desinstalar ShortsFactory.bat` (te pregunta si
+  quieres borrar también tus datos).
+- Si algo falla, el registro está en `%LOCALAPPDATA%\ShortsFactory\instalacion.log`.
+
+Después de instalar: abre la app, sigue el asistente y, en **Ajustes › Canales**, pulsa
+**«Iniciar sesión en Studio»** en cada canal para iniciar sesión a mano (una sola vez).
+
+---
 
 ## Principios y restricciones
 
@@ -24,9 +52,9 @@ YouTube de **historias cortas por partes**, con versión en español y en inglé
 
 ---
 
-## Instalación
+## Instalación manual (Linux o desarrolladores)
 
-Requisitos: **Python 3.11+** y **FFmpeg** (binario libre).
+En Windows usa `INSTALAR.bat` (arriba). Para instalar a mano hacen falta **Python 3.11+** y **FFmpeg** (binario libre).
 
 ### 1. Instalar FFmpeg
 
@@ -40,13 +68,6 @@ En **Ajustes › FFmpeg › Comprobar FFmpeg** la app muestra la versión, los c
 disponibles y si falta algún filtro (`ass`, `drawtext`, `vidstabdetect`, `sidechaincompress`…).
 
 ### 2. Instalar la app
-
-**Windows**
-
-```bat
-scripts\install_windows.bat
-scripts\run_windows.bat
-```
 
 **Linux**
 

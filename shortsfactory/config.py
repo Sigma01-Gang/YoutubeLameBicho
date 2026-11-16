@@ -29,6 +29,29 @@ def sub_dir(name: str) -> Path:
     return p
 
 
+def bundled_tool_dirs() -> list[Path]:
+    """Carpetas donde el instalador deja FFmpeg (se prefieren a la versión del PATH)."""
+    dirs = []
+    if os.environ.get("SHORTSFACTORY_FFMPEG_DIR"):
+        dirs.append(Path(os.environ["SHORTSFACTORY_FFMPEG_DIR"]))
+    if os.environ.get("LOCALAPPDATA"):
+        dirs.append(Path(os.environ["LOCALAPPDATA"]) / APP_NAME / "ffmpeg" / "bin")
+    dirs.append(Path(__file__).resolve().parents[1] / "ffmpeg" / "bin")
+    return dirs
+
+
+def resolve_tool(name: str, configured: str | None) -> str:
+    """Ruta del ejecutable: la configurada en Ajustes; si es la de por defecto, la incluida por el instalador."""
+    configured = (configured or "").strip()
+    if configured and configured != name:
+        return configured
+    exe = name + (".exe" if sys.platform.startswith("win") else "")
+    for d in bundled_tool_dirs():
+        if (d / exe).is_file():
+            return str(d / exe)
+    return configured or name
+
+
 DEFAULT_SETTINGS: dict = {
     "ffmpeg_path": "ffmpeg",
     "ffprobe_path": "ffprobe",

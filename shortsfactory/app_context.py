@@ -9,7 +9,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 from .channels.service import ChannelService
-from .config import data_dir, sub_dir
+from .config import data_dir, resolve_tool, sub_dir
 from .ffmpeg import runner
 from .library.files import AssetLibrary, cleanup_temp
 from .persistence.db import Database
@@ -58,8 +58,8 @@ class AppContext:
 
     @property
     def tools(self) -> runner.Tools:
-        return runner.Tools(self.db.get_setting("ffmpeg_path", "ffmpeg") or "ffmpeg",
-                            self.db.get_setting("ffprobe_path", "ffprobe") or "ffprobe")
+        return runner.Tools(resolve_tool("ffmpeg", self.db.get_setting("ffmpeg_path", "ffmpeg")),
+                            resolve_tool("ffprobe", self.db.get_setting("ffprobe_path", "ffprobe")))
 
     @property
     def processor(self) -> Processor:

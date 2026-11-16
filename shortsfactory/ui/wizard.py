@@ -6,7 +6,7 @@ import shutil
 from PySide6.QtWidgets import (QCheckBox, QFileDialog, QFormLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
                                QVBoxLayout, QWizard, QWizardPage)
 
-from ..config import sub_dir
+from ..config import resolve_tool, sub_dir
 from ..ffmpeg import runner
 from ..upload.studio import AUTOMATION_NOTICE
 
@@ -23,8 +23,10 @@ class FirstRunWizard(QWizard):
         p1.setTitle("1. FFmpeg")
         p1.setSubTitle("Todo el procesamiento de vídeo es local con FFmpeg/ffprobe.")
         f1 = QFormLayout(p1)
-        self.ffmpeg = QLineEdit(shutil.which("ffmpeg") or ctx.db.get_setting("ffmpeg_path"))
-        self.ffprobe = QLineEdit(shutil.which("ffprobe") or ctx.db.get_setting("ffprobe_path"))
+        ff = resolve_tool("ffmpeg", ctx.db.get_setting("ffmpeg_path"))
+        fp = resolve_tool("ffprobe", ctx.db.get_setting("ffprobe_path"))
+        self.ffmpeg = QLineEdit(ff if ff != "ffmpeg" else (shutil.which("ffmpeg") or ff))
+        self.ffprobe = QLineEdit(fp if fp != "ffprobe" else (shutil.which("ffprobe") or fp))
         pick = QPushButton("Buscar…")
         pick.clicked.connect(self._pick)
         test = QPushButton("Comprobar")
